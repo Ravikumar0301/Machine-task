@@ -1,0 +1,86 @@
+<p>task works!</p>
+
+<form [formGroup] = "userform">
+    <label>User Name :</label>
+    <div><input type="text" formControlName="username"></div>    
+    <div *ngIf = "f.username.invalid && f.username.touched">
+        <div *ngIf ="f.username.errors.required" class="errormsg">
+            Please Enter the User Name.
+        </div>
+     </div> 
+    <label>Password :</label>
+    <div><input type="text" formControlName = "password"></div>
+    <div *ngIf = "f.password.invalid && f.password.touched">
+        <div *ngIf ="f.password.errors.required" class="errormsg">
+            Please Enter the Password
+        </div>
+     </div>
+    <label>Full Name :</label>
+    <div><input type="text" formControlName = "fullname"></div>
+    <div *ngIf = "f.fullname.invalid && f.fullname.touched">
+        <div *ngIf ="f.fullname.errors.required" class="errormsg">
+            Please Enter the Full Name.
+        </div>
+     </div>
+    <label>Email :</label>
+    <div><input type="text" formControlName = "email" ></div>
+    <div *ngIf = "f.email.invalid && f.email.touched" class="errormsg">
+        <div *ngIf ="f.email.errors.required">
+            Please enter email
+        </div>
+		<div *ngIf="f.email.hasError('pattern')">
+            Please enter valid email address.
+		</div>
+     </div>
+    <label>Phone :</label>
+    <div><input type="text" formControlName = "phone"></div>
+    <div *ngIf = "f.phone.invalid && f.phone.touched" class="errormsg">
+        <div *ngIf ="f.phone.errors.required" >
+            Please Enter the Phone.
+        </div>
+		<div *ngIf="f.phone.hasError('pattern')">
+            Please enter valid phone.
+		</div>
+     </div>
+    <label>Is Active :</label>
+    <div>
+        <select formControlName="isactive">
+            <option value = "false">False</option>
+            <option value = "true">True</option>
+        </select>
+    </div>
+    <div style="margin-top: 50px;">
+        <button *ngIf='mode === addMode' (click)= add_row()>submit</button>
+        <button *ngIf='mode === editMode'  (click)=update_row()>Update</button>
+    </div>
+</form>
+
+<div style="margin-top: 50px;">
+    <table>
+        <!-- <th>User ID</th> -->
+        <th>User Name</th>
+        <th>Password</th>
+        <!-- <th>User type id</th> -->
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Is active</th>
+        <th>CRUD</th>
+
+        <tr *ngFor = "let data of users; let i = index;">
+            <!-- <td>{{data.UserID}}</td> -->
+            <td>{{data.username}}</td>
+            <td>{{data.password}}</td>
+            <!-- <td>{{data.usertypeid}}</td> -->
+            <td>{{data.fullname}}</td>
+            <td>{{data.email}}</td>
+            <td>{{data.phone}}</td>
+            <td>{{data.isactive}}</td>
+            <td>
+                <button (click)=edit_row(i)>Edit</button>
+                <button (click)=delete_row(i)>Delete</button>
+            </td>
+        </tr>
+
+    </table>
+    </div>
